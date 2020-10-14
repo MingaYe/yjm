@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<title>Chap2 Demo</title>
+		<script id="vertex-shader" type="x-shader/x-vertex">
+			attribute vec3 vPosition;
+			attribute vec3 vColor;
+			varying vec4 color;
+
+		void main(){
+			gl_Position = vec4( vPosition, 1.0 );
+			color = vec4( vColor, 1.0 );
+		}
+		</script>
+
+		<script id="fragment-shader" type="x-shader/x-fragment">
+			precision mediump float;
+			varying vec4 color;
+			void main(){
+				gl_FragColor = color;
+		}
+		</script>
+
+		<!-- 一组相关的JS库 -->
+		<script type="text/javascript" src="common/webgl-utils.js"></script>
+		<script type="text/javascript" src="common/initShaders.js"></script>
+		<script type="text/javascript" src="common/gl-matrix-min.js"></script>
+		<!-- 绘制三角形的JS代码 -->
+		<script type="text/javascript" src="js/gasket-3d.js"></script>
+	</head>
+	<body>
+		
+		层数：<input type="number" id="cs" />
+		<input type="submit" onclick="init()"/>
+		<br />
+		<a href="lab2-1.html"><input type="button" value="2D" /></a>
+		<a href="lab2-4.html"><input type="button" value="线性" /></a>
+		<canvas id="gl-canvas" style="border:none;" width="500" height="500"></canvas>
+		<a href="index.html">🌙BACK</a>
+	</body>
+</html>
