@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<title>Chap2 Demo Gasket Point</title>
+		<script id="vertex-shader" type="x-shader/x-vertex">
+			attribute vec4 vPosition;
+			void main(){
+				gl_PointSize = 3.0;
+				gl_Position = vPosition;
+			}
+		</script>
+
+		<script id="fragment-shader" type="x-shader/x-fragment">
+		precision mediump float;
+		void main(){
+			gl_FragColor = vec4( 1.0, 1.0, 0.0, 1.0 );
+		}
+		</script>
+
+		<!-- 一组相关的JS库 -->
+		<script type="text/javascript" src="common/webgl-utils.js"></script>
+		<script type="text/javascript" src="common/initShaders.js"></script>
+		<script type="text/javascript" src="common/gl-matrix-min.js"></script>
+		<!-- 绘制三角形的JS代码 -->
+		<script type="text/javascript" src="js/gasket-2-5.js"></script>
+	</head>
+	<body>
+		
+		角度：<input type="number" id="jd" />
+		<input type="submit"  onclick="initTriangless()"/>
+		<br />
+		<a href="lab2-1.html"><input type="button" value="2D" /></a>
+		<a href="lab2-2.html"><input type="button" value="3D" /></a>
+		<a href="lab2-4.html"><input type="button" value="线性" /></a>
+		<canvas id="gl-canvas" style="border:none;" width="400" height="400"></canvas>
+		<a href="index.html">🌙BACK</a>
+	</body>
+</html>
