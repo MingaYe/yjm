@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-type" content="text/html;charset=utf-8">
+    <title>lab4-1</title>
+    <script id="rtvshader" type="x-shader/x-vertex">
+	attribute vec4 vPosition;//定义顶点坐标
+	attribute vec4 vColor;//定义顶点颜色
+	varying vec4 fColor;//
+
+	uniform vec3 theta;//旋转
+	uniform vec3 d;//平移
+	uniform vec3 s;//缩放
+
+	void main()
+	{
+		//compute the sins and cos of theta for each of the three axis in one computation
+		vec3 angles = radians( theta );
+		vec3 cost = cos( theta );
+		vec3 sint = sin( theta );
+		
+
+		mat4 rx = mat4(  1.0,  0.0,  0.0, 0.0,
+						 0.0,  cost.x,  sint.x, 0.0,
+						 0.0,  -sint.x,  cost.x, 0.0,
+						 0.0,  0.0,  0.0, 1.0
+						 );
+
+		mat4 ry = mat4(  cost.y,  0.0, -sint.y,  0.0,
+						 0.0,  1.0,  0.0,  0.0,
+						 sint.y,  0.0,  cost.y,  0.0,
+						 0.0,  0.0,  0.0,  1.0
+						 );
+
+		mat4 rz = mat4(  cost.z,  sint.z,  0.0,  0.0,
+						 -sint.z,  cost.z,  0.0,  0.0,
+						 0.0,  0.0,  1.0,  0.0,
+						 0.0,  0.0,  0.0,  1.0
+						 );
+		//平移
+		mat4 dt = mat4(  1.0,  0.0,  0.0, 0.0,
+						 0.0,  1.0,  0.0,  0.0,
+						 0.0,  0.0,  1.0,  0.0,
+						 d.x,  d.y,  d.z,  1.0
+						 );
+		//缩放
+		mat4 sf = mat4(  s.x,  0.0,  0.0, 0.0,
+						 0.0,  s.y,  0.0,  0.0,
+						 0.0,  0.0,  s.z,  0.0,
+						 0.0,  0.0,  0.0,  1.0
+						 );
+
+		fColor = vColor;
+		gl_Position = sf * dt * rz * ry * rx * vPosition;
+		gl_Position.z = -gl_Position.z;
+	}
+	</script>
+
+    <script id="rtfshader" type="x-shader/x-fragment">
+	precision mediump float;
+	varying vec4 fColor;
+
+	void main()
+	{
+		gl_FragColor = fColor;
+	}
+	</script>
+    <script type="text/javascript" src="common/webgl-utils.js"></script>
+    <script type="text/javascript" src="common/initShaders.js"></script>
+    <script type="text/javascript" src="common/gl-matrix-min.js"></script>
+    
+    <script type="text/javascript" src="js/lab4-1.js"></script>
+</head>
+
+<body>
+    <h1>旋转的立方体</h1>
+    <canvas id="rtcb-canvas" width="600" height="600">
+        你的浏览器不支持HTML5 canvas元素
+    </canvas>
+	<br />
+    旋转
+	<button id="xbutton">X</button>
+    <button id="ybutton">Y</button>
+    <button id="zbutton">Z</button>
+	<br />
+	平移
+	<button id="xpingyi">X</button>
+	<button id="ypingyi">Y</button>
+	<button id="zpingyi">Z</button>
+	<br />
+	缩放
+	<button id="xsuofang">X</button>
+	<button id="ysuofang">Y</button>
+	<button id="zsuofang">Z</button>
+</body>
+
+</html>
