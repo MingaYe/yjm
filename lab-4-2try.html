@@ -12,6 +12,7 @@
 	uniform vec3 theta;
 	uniform vec3 s;
 	uniform vec3 pos;
+	uniform vec3 d;
 	void main()
 	{
 		vec3 angles = radians( theta );
@@ -46,10 +47,15 @@
 						 0.0,  0.0,  1.0, 0.0,
 						 pos.x, pos.y,  pos.z, 1.0
 		 );
+		 mat4 dd = mat4(  1.0,  0.0,  0.0, 0.0,
+		 				 0.0,  1.0,  0.0, 0.0,
+		 				 0.0,  0.0,  1.0, 0.0,
+		 				 d.x, d.y,  d.z, 1.0
+		  );
 		
 		fColor = vColor;
 		gl_Position = vPosition;
-		gl_Position = dt * st * rz * ry * rx *  gl_Position;
+		gl_Position = dt * st * rz * dd * ry * rx *  gl_Position;
 		gl_Position.z = -gl_Position.z;
 		//gl_PointSize = 10.0;
 	}
@@ -93,7 +99,7 @@
 		<option value="6">Cyan</option>
 		</select>
 	<br />
-	<input type="range" id="bs" value="6" min="4" max="60" step="6">
+	<input type="range" id="bs" min="4" max="30" step="6">
 	<button onclick="history.go(0)">清空</button>
 </body>
 
