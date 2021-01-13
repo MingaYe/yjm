@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+	<title>lab6-a</title>
+    <script id="vertex-shader" type="x-shader/x-vertex">
+        attribute vec4 vPosition;
+
+		uniform mat4 modelViewMatrix;
+		uniform mat4 projectionMatrix;
+
+		void main()
+		{
+			gl_Position = projectionMatrix * modelViewMatrix * vPosition;
+		}
+	</script>
+
+    <script id="fragment-shader" type="x-shader/x-fragment">
+        precision mediump float;
+
+		void main()
+		{
+			gl_FragColor = vec4( 0.0, 0.0, 0.0, 1.0 );
+		}
+	</script>
+
+    <script type="text/javascript" src="common/webgl-utils.js"></script>
+    <script type="text/javascript" src="common/initShaders.js"></script>
+    <script type="text/javascript" src="common/gl-matrix-min.js"></script>
+    <script type="text/javascript" src="common/objloader.js"></script>
+    
+    <script type="text/javascript" src="js/lab6-1.js"></script>
+</head>
+
+<body onload="initSphere()">
+    <h1>画一个球，利用单位圆内接正四面体，以递归方式构建一个球体</h1>
+	<canvas id="gl-canvas" width="800" height="800" ></canvas>
+    <table style="border:1px solid black">
+        <tr style="text-align: center;"><h3>按键设置</h3></tr>
+        <tr style="text-align: center;">
+            <td>A</td>
+            <td>D</td>
+            <td>W</td>
+            <td>S</td>
+            <td>Z</td>
+            <td>X</td>
+        </tr>
+        <tr>
+            <td>绕x轴正向转动</td>
+            <td>绕x轴负向转动</td>
+            <td>绕y轴正向转动</td>
+            <td>绕y轴负向转动</td>
+            <td>绕z轴正向转动</td>
+            <td>绕z轴负向转动</td>
+        </tr>
+        <tr style="text-align: center;">
+            <td>H</td>
+            <td>K</td>
+            <td>U</td>
+            <td>J</td>
+            <td>M</td>
+            <td>N</td>
+        </tr>
+        <tr>
+            <td>沿x轴负向移动</td>
+            <td>沿x轴正向移动</td>
+            <td>沿y轴正向移动</td>
+            <td>沿y轴负向移动</td>
+            <td>沿z轴正向移动</td>
+            <td>沿z轴负向移动</td>
+        </tr>
+        <tr style="text-align: center;">
+            <td>V</td>
+            <td>B</td>
+        </tr>
+        <tr>
+            <td>增加分块</td>
+            <td>减小分块</td>
+        </tr>
+    </table>
+</body>
+
+</html>
